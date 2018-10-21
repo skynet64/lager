@@ -1,20 +1,18 @@
-Overview
---------
+Lager
+=====
+
+[![Build Status](https://travis-ci.org/voxoz/lager.svg?branch=master)](https://travis-ci.org/voxoz/lager)
+
 Lager (as in the beer) is a logging framework for Erlang. Its purpose is
 to provide a more traditional way to perform logging in an erlang application
 that plays nicely with traditional UNIX logging tools like logrotate and
 syslog.
 
-  [Travis-CI](http://travis-ci.org/basho/lager) :: ![Travis-CI](https://secure.travis-ci.org/basho/lager.png)
-
 Features
 --------
-* Finer grained log levels (debug, info, notice, warning, error, critical,
-  alert, emergency)
-* Logger calls are transformed using a parse transform to allow capturing
-  Module/Function/Line/Pid information
-* When no handler is consuming a log level (eg. debug) no event is sent
-  to the log handler
+* Finer grained log levels (debug, info, notice, warning, error, critical, alert, emergency)
+* Logger calls are transformed using a parse transform
+* When no handler is consuming a log level (eg. debug) no event is sent to the log handler
 * Supports multiple backends, including console and file.
 * Supports multiple sinks
 * Rewrites common OTP error messages into more readable messages
