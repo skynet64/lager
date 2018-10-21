@@ -159,13 +159,13 @@ start_error_logger_handler(true, HWM, WhiteList) ->
                 end,
 
 
-    _ = case supervisor:start_child(lager_handler_watcher_sup, [error_logger, error_logger_lager_h, [HWM, GlStrategy]]) of
-        {ok, _} ->
-            [begin error_logger:delete_report_handler(X), X end ||
-                X <- gen_event:which_handlers(error_logger) -- [error_logger_lager_h | WhiteList]];
-        {error, _} ->
-            []
-    end,
+%    _ = case supervisor:start_child(lager_handler_watcher_sup, [error_logger, error_logger_lager_h, [HWM, GlStrategy]]) of
+%        {ok, _} ->
+%            [begin error_logger:delete_report_handler(X), X end ||
+%                X <- gen_event:which_handlers(error_logger) -- [error_logger_lager_h | WhiteList]];
+%        {error, _} ->
+%            []
+%    end,
 
     Handlers = case application:get_env(lager, handlers) of
         undefined ->
