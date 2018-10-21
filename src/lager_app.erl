@@ -142,31 +142,7 @@ maybe_install_sink_killer(_Sink, HWM, ReinstallTimer) ->
 -spec start_error_logger_handler(boolean(), pos_integer(), list()) -> list().
 start_error_logger_handler(false, _HWM, _Whitelist) ->
     [];
-start_error_logger_handler(true, HWM, WhiteList) ->
-    GlStrategy = case application:get_env(lager, error_logger_groupleader_strategy) of
-                    undefined ->
-                        handle;
-                    {ok, GlStrategy0} when
-                            GlStrategy0 =:= handle;
-                            GlStrategy0 =:= ignore;
-                            GlStrategy0 =:= mirror ->
-                        GlStrategy0;
-                    {ok, BadGlStrategy} ->
-                        error_logger:error_msg(
-                          "Invalid value for 'error_logger_groupleader_strategy': ~p~n",
-                          [BadGlStrategy]),
-                        throw({error, bad_config})
-                end,
-
-
-%    _ = case supervisor:start_child(lager_handler_watcher_sup, [error_logger, error_logger_lager_h, [HWM, GlStrategy]]) of
-%        {ok, _} ->
-%            [begin error_logger:delete_report_handler(X), X end ||
-%                X <- gen_event:which_handlers(error_logger) -- [error_logger_lager_h | WhiteList]];
-%        {error, _} ->
-%            []
-%    end,
-
+start_error_logger_handler(true, _HWM, _WhiteList) ->
     Handlers = case application:get_env(lager, handlers) of
         undefined ->
             [{lager_console_backend, info},
