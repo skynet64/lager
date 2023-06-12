@@ -237,6 +237,9 @@ do_transform(Line, SinkName, Severity, Arguments0, Safety) ->
           %% _ -> ok
           {clause,Line,[{var,Line,'_'}],[],[{atom,Line,ok}]}]}.
 
+make_varname(Prefix, {Line,_}) ->
+    list_to_atom(Prefix ++ atom_to_list(get(module)) ++ integer_to_list(Line));
+
 make_varname(Prefix, Line) ->
     list_to_atom(Prefix ++ atom_to_list(get(module)) ++ integer_to_list(Line)).
 
